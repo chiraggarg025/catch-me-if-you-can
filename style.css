@@ -1,0 +1,16 @@
+#box{
+	text-align: center;
+	width: 10vw;
+	height: 15vh;
+	color: white;
+	justify-content: center;
+	align-items: center;
+	background-color: lightblue;
+	vertical-align: middle;
+	display: flex;
+	border: 2px solid red;
+	margin-top: 10vh;
+	margin-left: 5vw;
+	margin-right: 95vw;
+	margin-bottom: 90vh;
+}
