@@ -1,35 +1,41 @@
-document.getElementById('box').addEventListener('mouseover',function(e){
-	let random1 = (Math.random() - 0.5) * 2*100; 
-	let random2 = (Math.random() - 0.5) * 2*100; 
-	let random3 = (Math.random() - 0.5) * 2*100; 
-	let random4 = (Math.random() - 0.5) * 2*100; 
-		let marginTop=document.getElementById('box').style.marginTop;
-		marginTop=Number(marginTop.substring(0,marginTop.length-2));
-		marginTop+=random1;
-		
-		
-		let marginLeft=document.getElementById('box').style.marginLeft;
-		marginLeft=Number(marginLeft.substring(0,marginLeft.length-2));
-		marginLeft+=random2;
+var box = document.getElementById("box");
 
-		let marginRight=document.getElementById('box').style.marginRight;
-		marginRight=Number(marginRight.substring(0,marginRight.length-2));
-		marginRight+=random3;
+var viewWidth = window.innerWidth;
+var viewHeight = window.innerHeight;
 
-		let marginBottom=document.getElementById('box').style.marginBottom;
-		marginBottom=Number(marginBottom.substring(0,marginBottom.length-2));
-		marginBottom+=random4;
 
-		if(marginTop>10 && marginTop<90){
-			document.getElementById('box').style.marginTop=marginTop+'vh';
-		}
-		if(marginLeft>10 && marginLeft<90){
-			document.getElementById('box').style.marginLeft=marginLeft+'vw';
-		}
-		if(marginBottom>10 && marginBottom<90){
-			document.getElementById('box').style.marginBottom=marginBottom+'vh';
-		}
-		if(marginRight>10 && marginRight<90){
-			document.getElementById('box').style.marginRight=marginRight+'vw';
-		}
-})
+// Updates the viewport height and width dynamically
+window.addEventListener("resize", function(event) {
+    viewWidth = window.innerWidth;
+    viewHeight = window.innerHeight;
+});
+
+
+
+box.addEventListener("mouseover", function(event) {
+    var boxAttr = box.getBoundingClientRect();
+    
+    var pos = getNewPosition(boxAttr.width, boxAttr.height);
+    
+    box.style.top = pos.y + "px";
+    box.style.left = pos.x + "px";
+});
+
+
+
+function getNewPosition(boxWidth, boxHeight) {
+    
+    // The boxWidth and boxHeight are subtracted so that they would not move out from the right and bottom direction
+    var newX = Math.floor((Math.random() * viewWidth) + 1 - boxWidth);
+    var newY = Math.floor((Math.random() * viewHeight) + 1 - boxHeight);
+
+    // These will satisfy that box does not move go out in the top and left direction
+    if(newX < 0) {
+        newX = 0;
+    }
+    if(newY < 0) {
+        newY = 0;
+    }
+    
+    return {x: newX, y: newY};
+}
